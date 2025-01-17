@@ -7,6 +7,7 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.Civil.DatabaseServices;
 using Autodesk.Civil.DatabaseServices.Styles;
 using Civil3DArbitraryCoordinate.Enums;
+using Civil3DArbitraryCoordinate.Models;
 using Civil3DArbitraryCoordinate.Utils;
 using Prism.Commands;
 using Prism.Events;
@@ -27,6 +28,7 @@ namespace Civil3DArbitraryCoordinate.ViewModels
         public LabelStyle SelectedPipeLabelStyle { get; set; }
 
         private string labelVariable;
+        private Pipe pipe;
 
         public string LabelVariable
         {
@@ -40,7 +42,19 @@ namespace Civil3DArbitraryCoordinate.ViewModels
 
         public DelegateCommand SelectLabelsToUpdateCommand { get; }
         public IEventAggregator EventAggregator { get; }
-        public Pipe Pipe { get; private set; }
+        public Pipe Pipe
+        {
+            get
+            {
+                return pipe;
+            }
+            set
+            {
+                pipe = value;
+                SelectPointCommand.RaiseCanExecuteChanged();
+                RaisePropertyChanged();
+            }
+        }
 
         public Point3d? Point { get; set; }
 
@@ -79,7 +93,55 @@ namespace Civil3DArbitraryCoordinate.ViewModels
 
         private void OnSelectPointCommand()
         {
-            Point = PromptUtils.PromptPoint("Pick point to set coordinate");
+            try
+            {
+                if (Pipe == null)
+                {
+                    return;
+                }
+
+                Point = PromptUtils.PromptPoint("Pick point to set coordinate");
+
+                if (SelectedPipeLabelStyle == null)
+                {
+                    return;
+                }
+
+                ObjectId labelStyleId = SelectedPipeLabelStyle.ObjectId;
+
+                if (Pipe.GetPipeLabelIds().Contains(labelStyleId))
+                {
+                    MessageBox.Show("Label already exist", "Error");
+                    return;
+                }
+
+                if (!Point.HasValue)
+                {
+                    return;
+                }
+
+                PipeArbitraryPoint pipeArbitraryPoint = PipeArbitraryPoint.Create(Pipe, new Point2d(Point.Value.X, Point.Value.Y));
+
+                using (AutocadDocumentService.LockActiveDocument())
+                {
+                    using (Transaction transaction = AutocadDocumentService.TransactionManager.StartTransaction())
+                    {
+                        Pipe pipeOpened = transaction.GetObject(Pipe.Id, OpenMode.ForWrite, false, true) as Pipe;
+                        ObjectId labelId = PipeLabel.Create(pipeOpened.Id, pipeArbitraryPoint.RatioFromStartPoint, labelStyleId);
+                        PipeLabel pipeLabel = transaction.GetObject(labelId, OpenMode.ForWrite, false, true) as PipeLabel;
+
+                        ObjectIdCollection componentTextCollection = SelectedPipeLabelStyle.GetComponents(LabelStyleComponentType.Text);
+
+                        pipeLabel.SetTextComponentOverride(transaction, LabelVariable, Math.Round(pipeArbitraryPoint.PipeCenterPoint.Z, 2).ToString());
+
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"{exception.Message}", "Error");
+            }
         }
 
         private void OnSelectLabelsToUpdateCommand()
@@ -92,47 +154,6 @@ namespace Civil3DArbitraryCoordinate.ViewModels
             try
             {
                 Pipe = SelectionUtils.GetElement<Pipe>("Select pipes to label");
-
-                if (Pipe == null)
-                {
-                    return;
-                }
-
-                if (SelectedPipeLabelStyle == null)
-                {
-                    return;
-                }
-
-                ObjectId labelStyleId = SelectedPipeLabelStyle.ObjectId;
-
-                if (!Pipe.GetPipeLabelIds().Contains(labelStyleId))
-                {
-                    return;
-                }
-
-                if (!Point.HasValue)
-                {
-                    return;
-                }
-
-                Point3d pipeProjectedPoint = Pipe.GetClosestPoint(Point.Value);
-
-                using (AutocadDocumentService.LockActiveDocument())
-                {
-                    using (Transaction transaction = AutocadDocumentService.TransactionManager.StartTransaction())
-                    {
-                        Pipe pipeOpened = transaction.GetObject(Pipe.Id, OpenMode.ForWrite, false, true) as Pipe;
-                        ObjectId labelId = PipeLabel.Create(pipeOpened.Id, 0.5, labelStyleId);
-                        PipeLabel pipeLabel = transaction.GetObject(labelId, OpenMode.ForWrite, false, true) as PipeLabel;
-
-                        ObjectIdCollection componentTextCollection = SelectedPipeLabelStyle.GetComponents(LabelStyleComponentType.Text);
-
-                        pipeLabel.SetTextComponentOverride(transaction, LabelVariable, Math.Round(pipeProjectedPoint.Z, 2).ToString());
-
-                        transaction.Commit();
-                    }
-                }
-
             }
             catch (Exception exception)
             {
