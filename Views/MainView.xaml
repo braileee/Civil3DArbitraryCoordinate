@@ -27,9 +27,13 @@
                     <Label Content="Label Variable"/>
                     <TextBox Text="{Binding LabelVariable}"/>
 
-                    <Label Content="Pipes"/>
-                    <Button Content="Select Pipes"
-                            Command="{Binding SelectPipesCommand}"/>
+                    <Label Content="Pipe"/>
+                    <Button Content="Select Pipe"
+                            Command="{Binding SelectPipeCommand}"/>
+
+                    <Label Content="Point"/>
+                    <Button Content="Select Point"
+                            Command="{Binding SelectPointCommand}"/>
                 </StackPanel>
             </TabItem>
 
