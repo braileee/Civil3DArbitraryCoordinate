@@ -1,0 +1,53 @@
+﻿<Window x:Class="Civil3DArbitraryCoordinate.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Civil3DArbitraryCoordinate.Views"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"     
+             mc:Ignorable="d" 
+             Width="300"    
+             SizeToContent="Height"
+             Title="Arbitrary coordinate">
+
+    <StackPanel Margin="2">
+
+        <TabControl>
+            <TabItem Header="Create">
+                <StackPanel>
+                    <Label Content="Elevation type"/>
+                    <ComboBox ItemsSource="{Binding ElevationTypes}"
+                              SelectedItem="{Binding SelectedElevationType}"/>
+
+                    <Label Content="Pipe Label Style"/>
+                    <ComboBox ItemsSource="{Binding PipeLabelStyles}"
+                              SelectedItem="{Binding SelectedPipeLabelStyle}"
+                              DisplayMemberPath="Name"/>
+
+                    <Label Content="Label Variable"/>
+                    <TextBox Text="{Binding LabelVariable}"/>
+
+                    <Label Content="Pipes"/>
+                    <Button Content="Select Pipes"
+                            Command="{Binding SelectPipesCommand}"/>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Update">
+                <StackPanel>
+                    <Label Content="Elevation type"/>
+                    <ComboBox ItemsSource="{Binding ElevationTypes}"
+                              SelectedItem="{Binding SelectedElevationType}"/>
+
+                    <Label Content="Label Variable"/>
+                    <TextBox Text="{Binding LabelVariable}"/>
+
+                    <Label Content="Labels To Update"/>
+                    <Button Content="Select Labels"
+                            Command="{Binding SelectLabelsToUpdateCommand}"/>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+    </StackPanel>
+</Window>

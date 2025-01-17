@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0">
+	<CompanyDetails Name="s.pavlovitsky" Email="s.pavlovitsky@gmail.com" />
+
+	<!--Civil 3D 2025-->
+	<Components>
+		<RuntimeRequirements OS="Win64" Platform="Civil3D" SeriesMin="R25.0" SeriesMax="R25.0"/>
+
+		<ComponentEntry AppName="Civil3DArbitraryCoordinate"
+						AppDescription="Civil3DArbitraryCoordinate"
+						ModuleName="./2025/Contents/Civil3DArbitraryCoordinate.dll"
+						LoadOnCommandInvocation ="True" LoadOnRequest="True">
+			<Commands GroupName="PSV">
+				<Command Local="Civil3DArbitraryCoordinate"
+						 Global="Civil3DArbitraryCoordinate"
+						 Description="Civil3DArbitraryCoordinate" />
+			</Commands>
+		</ComponentEntry>
+	</Components>
+</ApplicationPackage>
