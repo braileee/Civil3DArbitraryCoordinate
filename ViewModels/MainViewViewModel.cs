@@ -35,7 +35,7 @@ namespace Civil3DArbitraryCoordinate.ViewModels
                 }
 
                 ElevationTypes = new List<ElevationType> { ElevationType.OuterBottom, ElevationType.InnerBottom, ElevationType.Center, ElevationType.InnerTop, ElevationType.OuterTop };
-                SelectedElevationType = string.IsNullOrEmpty(Properties.Settings.Default.SelectedElevationType) ? ElevationType.Center : Enum.Parse<ElevationType>(Properties.Settings.Default.SelectedElevationType);
+                SelectedElevationType = string.IsNullOrEmpty(Properties.Settings.Default.SelectedElevationType) ? ElevationType.Center : EnumGenericUtils.Parse<ElevationType>(Properties.Settings.Default.SelectedElevationType);
 
                 LabelVariable = string.IsNullOrEmpty(Properties.Settings.Default.LabelVariable) ? "$ELEVATION$" : Properties.Settings.Default.LabelVariable;
 

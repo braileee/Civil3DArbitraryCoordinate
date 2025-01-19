@@ -19,16 +19,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Files\PackageContents.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="Files\PackageContents.xml">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Autofac" Version="5.2.0" />
 		<PackageReference Include="ControlzEx" Version="4.4.0" />
 		<PackageReference Include="MahApps.Metro" Version="2.4.9" />
@@ -261,6 +251,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Files\PackageContents.xml">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
 		<None Update="Properties\Settings.settings">
 			<Generator>SettingsSingleFileGenerator</Generator>
 			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
