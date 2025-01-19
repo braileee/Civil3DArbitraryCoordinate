@@ -1,15 +1,18 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PSU.Civil3D.ArbitraryCoordinate.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Civil3DArbitraryCoordinate.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DistanceValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="LabelVariable" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DeltaAngleValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">0.5</Value>
+    <Setting Name="SelectedElevationType" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ToleranceValue" Type="System.String" Scope="User">
-      <Value Profile="(Default)">3</Value>
+    <Setting Name="LabelStyleName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RoundingItem" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

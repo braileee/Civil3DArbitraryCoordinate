@@ -25,37 +25,49 @@ namespace Civil3DArbitraryCoordinate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public string DistanceValue {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LabelVariable {
             get {
-                return ((string)(this["DistanceValue"]));
+                return ((string)(this["LabelVariable"]));
             }
             set {
-                this["DistanceValue"] = value;
+                this["LabelVariable"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
-        public string DeltaAngleValue {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SelectedElevationType {
             get {
-                return ((string)(this["DeltaAngleValue"]));
+                return ((string)(this["SelectedElevationType"]));
             }
             set {
-                this["DeltaAngleValue"] = value;
+                this["SelectedElevationType"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public string ToleranceValue {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LabelStyleName {
             get {
-                return ((string)(this["ToleranceValue"]));
+                return ((string)(this["LabelStyleName"]));
             }
             set {
-                this["ToleranceValue"] = value;
+                this["LabelStyleName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RoundingItem {
+            get {
+                return ((string)(this["RoundingItem"]));
+            }
+            set {
+                this["RoundingItem"] = value;
             }
         }
     }

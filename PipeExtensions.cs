@@ -57,5 +57,39 @@ namespace Civil3DArbitraryCoordinate
 
             return elevation;
         }
+
+        public static double OuterDiameterOrHeight(this Pipe oPipe)
+        {
+            if(oPipe == null)
+            {
+                return 0;
+            }
+
+            if (oPipe.CrossSectionalShape == SweptShapeType.Circular)
+            {
+                return oPipe.OuterDiameterOrWidth;
+            }
+            else
+            {
+                return oPipe.OuterHeight;
+            }
+        }
+
+        public static double InnerDiameterOrHeight(this Pipe oPipe)
+        {
+            if (oPipe == null)
+            {
+                return 0;
+            }
+
+            if (oPipe.CrossSectionalShape == SweptShapeType.Circular)
+            {
+                return oPipe.InnerDiameterOrWidth;
+            }
+            else
+            {
+                return oPipe.InnerHeight;
+            }
+        }
     }
 }

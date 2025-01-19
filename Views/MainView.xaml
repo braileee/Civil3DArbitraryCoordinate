@@ -28,30 +28,18 @@
                     <TextBox Text="{Binding LabelVariable}"/>
 
                     <Label Content="Pipe"/>
-                    <Button Content="Select Pipe"
+                    <Button Content="{Binding SelectPipeInfo}"
                             Command="{Binding SelectPipeCommand}"/>
+
+                    <Label Content="Rounding"/>
+                    <ComboBox ItemsSource="{Binding RoundingItems}"
+                              SelectedItem="{Binding SelectedRoundingItem}"/>
 
                     <Label Content="Point"/>
                     <Button Content="Select Point"
                             Command="{Binding SelectPointCommand}"/>
                 </StackPanel>
             </TabItem>
-
-            <TabItem Header="Update">
-                <StackPanel>
-                    <Label Content="Elevation type"/>
-                    <ComboBox ItemsSource="{Binding ElevationTypes}"
-                              SelectedItem="{Binding SelectedElevationType}"/>
-
-                    <Label Content="Label Variable"/>
-                    <TextBox Text="{Binding LabelVariable}"/>
-
-                    <Label Content="Labels To Update"/>
-                    <Button Content="Select Labels"
-                            Command="{Binding SelectLabelsToUpdateCommand}"/>
-                </StackPanel>
-            </TabItem>
         </TabControl>
-
     </StackPanel>
 </Window>
